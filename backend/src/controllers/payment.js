@@ -14,8 +14,6 @@ router.post('/', async (req, res) => {
   try {
     const { order, Orderdata } = req.body;
 
-    // console.log(order, Orderdata);
-
     const {
       orderCreationId,
       razorpayPaymentId,
@@ -30,9 +28,7 @@ router.post('/', async (req, res) => {
     if (digest !== razorpaySignature)
       return res.status(400).json({ msg: 'Transaction not legit!' });
 
-    console.log(order);
-
-    const finaleOrder = await new Payment(order);
+    const finaleOrder = await Payment.create(order);
 
     console.log('final order', finaleOrder);
 
