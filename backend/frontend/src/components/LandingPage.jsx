@@ -14,14 +14,14 @@ import axios from 'axios';
 import clientApi from '../api';
 
 const LandingPage = () => {
-  useEffect(() => {
-    get();
-  }, []);
+  // useEffect(() => {
+  //   get();
+  // }, []);
 
-  const get = async () => {
-    let data = await clientApi.get('/api/user/demo');
-    console.log(data);
-  };
+  // const get = async () => {
+  //   let data = await clientApi.get('/api/user/demo');
+  //   console.log(data);
+  // };
 
   return (
     <Container

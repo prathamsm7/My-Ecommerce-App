@@ -33,7 +33,7 @@ const __DEV__ = document.domain === 'localhost';
 
 const CheckoutPage = () => {
   const cart = useSelector((state) => state.cart.cart);
-  const { user } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [details, setDetails] = useState({
@@ -67,30 +67,6 @@ const CheckoutPage = () => {
   let cartProducts = cart.map((prod) => {
     return { product: prod._id, quantity: prod.quantity };
   });
-
-  // const handleClick = async (event) => {
-  //   event.preventDefault();
-  //   setIsLoading(true);
-
-  //   setTimeout(async () => {
-  //     setIsLoading(false);
-
-  //     // dispatch(createOrder(order));
-  //     // console.log(order);
-
-  //     await clientApi
-  //       .post('/api/payment', order)
-  //       .then((res) => {
-  //         console.log(res);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         // navigate('/cart');
-  //       });
-
-  //     // dispatch(clearCart());
-  //   }, 3000);
-  // };
 
   // ? Payment Section
   async function displayRazorpay(e) {
@@ -137,7 +113,7 @@ const CheckoutPage = () => {
           };
 
           const order = {
-            user: user.user._id,
+            user: user._id || user.user._id,
             transactionId: Orderdata.razorpayOrderId,
             orderedProducts: [...cartProducts],
             shippingInfo: {
@@ -167,8 +143,8 @@ const CheckoutPage = () => {
             });
         },
         prefill: {
-          name: user.user.firstName,
-          email: user.user.email,
+          name: user?.firstName || user?.user.firstName,
+          email: user?.email || user?.user.email,
           phone_number: '9899999999',
         },
       };

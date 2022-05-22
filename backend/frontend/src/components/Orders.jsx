@@ -20,17 +20,25 @@ import { Skeleton } from '@chakra-ui/react';
 
 const Orders = () => {
   const { orders } = useSelector((state) => state.orders);
+  const user = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-      dispatch(fetchOrders());
+      // console.log('order', user.user.user.role);
+      if (user.user?.user.role == 'user') {
+        dispatch(fetchOrders(user.user.user._id));
+      } else if (user.role == 'user') {
+        dispatch(fetchOrders(user._id));
+      } else {
+        dispatch(fetchOrders());
+      }
     }, 2000);
   }, []);
 
-  // console.log(tData.data);
+  console.log(orders);
   return (
     <Container
       maxW={['100%', '95%']}
@@ -41,8 +49,11 @@ const Orders = () => {
       color='#262626'
     >
       <Heading as='h3'>Orders Details</Heading>
-      {!orders || isLoading ? (
+      {!orders || typeof orders == 'string' || isLoading ? (
         <div>
+          <Heading as='h6' fontSize='md' color='red.300'>
+            You dont have placed any order yet !
+          </Heading>
           <Stack>
             <Skeleton height='20px' />
             <Skeleton height='20px' />
@@ -71,18 +82,14 @@ const Orders = () => {
             <Tbody>
               {orders &&
                 orders.map((data, index) => {
-                  // let items = data.items;
-                  // let q = 0;
-                  // for (let i = 0; i < items.length; i++) {
-                  //   q += items[i].quantity;
-                  // }
+                  let date = new Date(data.createdAt).toString();
                   return (
                     <Tr key={data._id}>
                       <Td>{index + 1}</Td>
                       <Td>{data.transactionId}</Td>
                       <Td>{data.total.toFixed(2)}</Td>
                       <Th>{data.totalItems}</Th>
-                      <Th>{Date(data.createdAt).substring(0, 25)}</Th>
+                      <Th>{date.substring(0, 25)}</Th>
                     </Tr>
                   );
                 })}

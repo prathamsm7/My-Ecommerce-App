@@ -31,6 +31,7 @@ const paymentSchema = new mongoose.Schema(
         required: true,
       },
     },
+    date: { type: Date, default: Date.now() },
     total: { type: Number, required: true },
     totalItems: { type: Number, required: true },
     transactionId: { type: String },

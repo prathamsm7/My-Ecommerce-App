@@ -23,6 +23,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../helpers/auth';
 import { AllProducts } from '../redux/actions';
 import { getProducts, removeSelectedProducts } from '../redux/actions/product';
 

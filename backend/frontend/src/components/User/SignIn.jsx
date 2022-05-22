@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container } from '@chakra-ui/react';
+import { Container, FormHelperText, Heading } from '@chakra-ui/react';
 import {
   FormErrorMessage,
   FormLabel,
@@ -45,6 +45,7 @@ const SignIn = () => {
       bg='aliceblue'
       color='#262626'
     >
+      <Heading>Sign In</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={errors.email}>
           <FormLabel htmlFor='email'>Email</FormLabel>
@@ -63,6 +64,7 @@ const SignIn = () => {
         <FormControl isInvalid={errors.password}>
           <FormLabel htmlFor='password'>Password</FormLabel>
           <Input
+            type='password'
             id='password'
             placeholder='Password'
             {...register('password', {
@@ -70,6 +72,10 @@ const SignIn = () => {
               minLength: { value: 8, message: 'Minimum length should be 8' },
             })}
           />
+          <FormHelperText>
+            Password must be combination of atleast 1 small, 1 capital, 1
+            number, 1 special characted and in total 8 Characters{' '}
+          </FormHelperText>
           <FormErrorMessage>
             {errors.password && errors.password.message}
           </FormErrorMessage>

@@ -15,7 +15,18 @@ import SignUp from './User/SignUp';
 import NewProduct from './product/New';
 import ManageProducts from './product/ManageProducts';
 
+import { useSelector } from 'react-redux';
+import Private from '../helpers/Private';
+
 const AllRoutes = () => {
+  let { loading, error, user, isAuth, isReg, email, role } = useSelector(
+    (state) => state.user
+  );
+
+  if (!user?.email) {
+    user = useSelector((state) => state.user);
+  }
+
   return (
     <>
       <Navbar />
@@ -23,15 +34,21 @@ const AllRoutes = () => {
         <Route path='/' element={<LandingPage />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/details/:id' element={<Details />} />
-        <Route path='/cart' element={<CardContainer />} />
-        <Route path='/checkout' element={<CheckoutPage />} />
-        <Route path='/orders' element={<Orders />} />
+
+        <Route element={<Private isUser={user} />}>
+          <Route path='/home' element={<Home />} />
+          <Route path='/details/:id' element={<Details />} />
+          <Route path='/cart' element={<CardContainer />} />
+          <Route path='/checkout' element={<CheckoutPage />} />
+          <Route path='/orders' element={<Orders />} />
+        </Route>
+
         <Route path='/category' element={<AllCategories />} />
         <Route path='/category/new' element={<NewCategory />} />
         <Route path='/product/new' element={<NewProduct />} />
         <Route path='/product/manage' element={<ManageProducts />} />
+
+        <Route path='*' element={<div>Page Not Found 404</div>} />
       </Routes>
       <Footer />
     </>

@@ -24,12 +24,11 @@ import { logoutUser } from '../redux/actions/user';
 const Navbar = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
-  const { loading, error, user, isAuth, isReg } = useSelector(
+  const { loading, error, user, isAuth, isReg, email, role } = useSelector(
     (state) => state.user
   );
-  console.log(user);
 
-  useEffect(() => {}, [dispatch, user]);
+  useEffect(() => {}, [dispatch, user, isAuth]);
 
   return (
     <>
@@ -43,16 +42,24 @@ const Navbar = () => {
         <Box display={['none', 'flex']} color='#00bbf9'>
           <Box p='4'>
             <Heading as='h6' size='sm' color='pink'>
-              {user?.user?.email ? (
-                <Button
-                  variant='outline'
-                  colorScheme='cyan'
-                  onClick={() => {
-                    dispatch(logoutUser());
-                  }}
-                >
-                  Signout
-                </Button>
+              {email || user?.user?.email ? (
+                <Flex>
+                  <Button
+                    variant='outline'
+                    colorScheme='cyan'
+                    onClick={() => {
+                      dispatch(logoutUser());
+                    }}
+                  >
+                    Signout
+                  </Button>
+                  {role == 'admin' || user?.user?.role == 'admin' ? (
+                    <Flex justifyContent='space-around' minW='200px'>
+                      <Link to='/product/manage'>Product</Link>
+                      <Link to='/category'>Category</Link>{' '}
+                    </Flex>
+                  ) : null}
+                </Flex>
               ) : (
                 <>
                   <Link to='/signin'>Signin</Link>
@@ -66,7 +73,7 @@ const Navbar = () => {
             </Heading>
           </Box>
 
-          {user && user?.user?.email ? (
+          {email || (user && user?.user?.email) ? (
             <>
               <Box p='4'>
                 <Heading as='h6' size='sm'>

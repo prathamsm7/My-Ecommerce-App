@@ -14,8 +14,11 @@ export const loginUser = (payload) => async (dispatch) => {
 
     let data = await clientApi.post(`/api/user/login`, payload);
 
+    console.log(data);
+
     if (data.data.user) {
       localStorage.setItem('loginUser', JSON.stringify(data.data.user));
+      localStorage.setItem('token', JSON.stringify(data.data.token));
     }
 
     dispatch({
@@ -51,5 +54,6 @@ export const signupUser = (payload) => async (dispatch) => {
 
 export const logoutUser = () => async (dispatch) => {
   localStorage.removeItem('loginUser');
+  localStorage.removeItem('token');
   dispatch({ type: LOGOUT_USER });
 };

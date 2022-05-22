@@ -54,13 +54,7 @@ export const userReducer = (state = obj, action) => {
         isReg: false,
       };
     case LOGOUT_USER:
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        isAuth: false,
-        user: {},
-      };
+      return {};
     default:
       return state;
   }

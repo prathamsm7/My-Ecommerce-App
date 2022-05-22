@@ -21,10 +21,13 @@ export const clearOrder = () => (dispatch) => {
   dispatch({ type: CLEAR_ORDER });
 };
 
-export const fetchOrders = () => async (dispatch) => {
-  let orders = await clientApi(`/api/payment`);
-
-  console.log('order data', orders);
+export const fetchOrders = (id) => async (dispatch) => {
+  let orders;
+  if (!id) {
+    orders = await clientApi(`/api/payment`);
+  } else {
+    orders = await clientApi(`/api/payment/${id}`);
+  }
   let data = await orders.data;
 
   dispatch({ type: FETCH_ORDERS, payload: data });
