@@ -103,7 +103,7 @@ const CheckoutPage = () => {
         name: 'MobiShop',
         description: 'Thank you for nothing. Please give us some money',
         image:
-          'https://www.expedia.co.in/_dms/header/logo.svg?locale=en_GB&siteid=27&2',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBJbfD1Dwsc-sE12mJTihnt4XctsUayg8g2w&usqp=CAU',
         handler: async function (response) {
           const Orderdata = {
             orderCreationId: data.id,
