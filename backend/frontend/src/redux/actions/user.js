@@ -51,5 +51,5 @@ export const signupUser = (payload) => async (dispatch) => {
 
 export const logoutUser = () => async (dispatch) => {
   localStorage.removeItem('loginUser');
-  dispatch({ type: LOGOUT_USER, payload: { user: {} } });
+  dispatch({ type: LOGOUT_USER });
 };

@@ -10,14 +10,6 @@ const newToken = (user) => {
   return jwt.sign({ user }, `${process.env.JWT_SECRET}`, { expiresIn: '365d' });
 };
 
-router.get('/demo', async (req, res) => {
-  try {
-    return res.send('Demo route');
-  } catch (error) {
-    return res.send(error.message);
-  }
-});
-
 router.post(
   '',
   [
@@ -88,7 +80,7 @@ router.post(
         });
       }
 
-      let user = await User.findOne({ email: req.body.email });
+      let user = await User.findOne({ email: req.body.email }).exec();
 
       if (!user) {
         return res
@@ -103,6 +95,14 @@ router.post(
       }
 
       const token = newToken(user);
+
+      user = {
+        role: user.role,
+        _id: user._id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      };
 
       return res.send({ user, token });
     } catch (error) {

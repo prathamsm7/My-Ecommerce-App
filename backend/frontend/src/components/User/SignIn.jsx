@@ -31,7 +31,7 @@ const SignIn = () => {
   }
 
   useEffect(() => {
-    if (isAuth && user.user) {
+    if (isAuth) {
       navigate('/cart');
     }
   }, [dispatch, error, isAuth]);

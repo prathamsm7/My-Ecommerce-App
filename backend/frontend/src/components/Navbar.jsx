@@ -8,7 +8,7 @@ import {
   IconButton,
   Button,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,8 +24,12 @@ import { logoutUser } from '../redux/actions/user';
 const Navbar = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
-  const { loading, error, user, isAuth } = useSelector((state) => state);
-  // console.log(user);
+  const { loading, error, user, isAuth, isReg } = useSelector(
+    (state) => state.user
+  );
+  console.log(user);
+
+  useEffect(() => {}, [dispatch, user]);
 
   return (
     <>
@@ -39,7 +43,7 @@ const Navbar = () => {
         <Box display={['none', 'flex']} color='#00bbf9'>
           <Box p='4'>
             <Heading as='h6' size='sm' color='pink'>
-              {user.email ? (
+              {user?.user?.email ? (
                 <Button
                   variant='outline'
                   colorScheme='cyan'
@@ -52,15 +56,17 @@ const Navbar = () => {
               ) : (
                 <>
                   <Link to='/signin'>Signin</Link>
-                  <Link to='/signup' style={{ marginLeft: '10px' }}>
-                    Signup
-                  </Link>
+                  {!isReg ? (
+                    <Link to='/signup' style={{ marginLeft: '10px' }}>
+                      Signup
+                    </Link>
+                  ) : null}
                 </>
               )}
             </Heading>
           </Box>
 
-          {user && user.email ? (
+          {user && user?.user?.email ? (
             <>
               <Box p='4'>
                 <Heading as='h6' size='sm'>
