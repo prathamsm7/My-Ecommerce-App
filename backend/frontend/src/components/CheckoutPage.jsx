@@ -62,6 +62,7 @@ const CheckoutPage = () => {
     cartItems += q;
   });
 
+  // console.log(user.user.user);
   // ! payment gateway
 
   let cartProducts = cart.map((prod) => {
@@ -113,7 +114,7 @@ const CheckoutPage = () => {
           };
 
           const order = {
-            user: user._id || user.user._id,
+            user: user._id || user.user.user._id,
             transactionId: Orderdata.razorpayOrderId,
             orderedProducts: [...cartProducts],
             shippingInfo: {
@@ -143,8 +144,8 @@ const CheckoutPage = () => {
             });
         },
         prefill: {
-          name: user?.firstName || user?.user.firstName,
-          email: user?.email || user?.user.email,
+          name: user?.firstName || user.user.user.firstName,
+          email: user?.email || user.user.user.email,
           phone_number: '9899999999',
         },
       };
