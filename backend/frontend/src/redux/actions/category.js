@@ -75,7 +75,7 @@ export const deleteCategory = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_CATEGORY_REQUEST });
 
-    const data = await clientApi.delete(`api/category/${id}`);
+    const data = await clientApi.delete(`/api/category/${id}`);
 
     dispatch({
       type: DELETE_CATEGORY_SUCCESS,

@@ -3,6 +3,7 @@ export const CREATE_ORDER = 'CREATE_ORDER';
 export const CLEAR_CART = 'CLEAR_CART';
 export const CLEAR_ORDER = 'CLEAR_ORDER';
 export const FETCH_ORDERS = 'FETCH_ORDERS';
+import clientApi from '../../api';
 
 export const createOrder = (payload) => async (dispatch) => {
   let order = await axios.post(
@@ -21,9 +22,7 @@ export const clearOrder = () => (dispatch) => {
 };
 
 export const fetchOrders = () => async (dispatch) => {
-  let orders = await axios.get(
-    `http://localhost:8080/api/payment/62863f91cf03550aca62cd4e`
-  );
+  let orders = await clientApi(`/api/payment`);
 
   console.log('order data', orders);
   let data = await orders.data;

@@ -62,7 +62,7 @@ export const createProduct = (formData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
-    const { data } = await clientApi.post('api/product', formData);
+    const { data } = await clientApi.post('/api/product', formData);
 
     dispatch({
       type: NEW_PRODUCT_SUCCESS,
@@ -80,7 +80,7 @@ export const updateProduct = (id, formData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
 
-    const { data } = await clientApi.patch(`api/product/${id}`, formData);
+    const { data } = await clientApi.patch(`/api/product/${id}`, formData);
 
     dispatch({
       type: UPDATE_PRODUCT_SUCCESS,
@@ -98,7 +98,7 @@ export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
-    const { data } = await clientApi.delete(`api/product/${id}`);
+    const { data } = await clientApi.delete(`/api/product/${id}`);
 
     dispatch({
       type: DELETE_PRODUCT_SUCCESS,

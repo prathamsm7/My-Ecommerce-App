@@ -108,13 +108,16 @@ const CheckoutPage = () => {
         amount: cartTotal.toFixed(2),
         currency: 'INR',
       };
-      const data = await fetch(`http://localhost:8080/api/payment/pay`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payData),
-      }).then((t) => t.json());
+      const data = await fetch(
+        `https://my-mern-ecommerce-app.herokuapp.com/api/payment/pay`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payData),
+        }
+      ).then((t) => t.json());
       const options = {
         // key: __DEV__ ? "rzp_test_LrUd2sYQ0QeGXG" : "PRODUCTION_KEY",
         key: __DEV__ ? 'rzp_test_LrUd2sYQ0QeGXG' : 'rzp_test_LrUd2sYQ0QeGXG',
@@ -147,7 +150,10 @@ const CheckoutPage = () => {
           };
 
           const result = await axios
-            .post(`http://localhost:8080/api/payment`, { order, Orderdata })
+            .post(`https://my-mern-ecommerce-app.herokuapp.com/api/payment`, {
+              order,
+              Orderdata,
+            })
             .then((res) => {
               setTimeout(() => {
                 dispatch(clearCart());
