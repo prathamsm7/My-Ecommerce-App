@@ -69,12 +69,12 @@ export const createProduct = (formData) => async (dispatch) => {
     const { data } = await clientApi.post('/api/product', formData);
 
     setTimeout(() => {
+      toast.success('Product Created !');
       dispatch({
         type: NEW_PRODUCT_SUCCESS,
         payload: data,
       });
     }, 3000);
-    toast.success('Product Created !');
   } catch (error) {
     setTimeout(() => {
       toast.info('Product Creation Failed');

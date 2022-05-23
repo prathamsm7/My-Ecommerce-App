@@ -24,7 +24,7 @@ const NewProduct = () => {
 
   useEffect(() => {
     dispatch(getCategories());
-  }, []);
+  }, [dispatch]);
 
   const [values, setValues] = useState({
     title: '',
