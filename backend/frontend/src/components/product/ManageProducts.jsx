@@ -58,7 +58,9 @@ const ManageProducts = () => {
   const { title, price } = values;
 
   useEffect(() => {
-    dispatch(getProducts(sortBy, []));
+    setTimeout(() => {
+      dispatch(getProducts(sortBy, []));
+    }, 1000);
   }, [dispatch]);
 
   const handleDelete = async (id) => {

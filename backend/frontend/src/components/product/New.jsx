@@ -64,7 +64,9 @@ const NewProduct = () => {
     formData.append('images', images);
 
     dispatch(createProduct(formData));
-    navigate('/product/manage');
+    setTimeout(() => {
+      navigate('/product/manage');
+    }, 1000);
   };
 
   const onChangeInput = (e) => {
