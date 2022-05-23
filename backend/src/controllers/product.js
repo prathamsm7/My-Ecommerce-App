@@ -1,18 +1,33 @@
 const Product = require('../models/product');
 const express = require('express');
-const Category = require('../models/Category');
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+const upload = require('../multer');
+
+router.post('/', upload.single('images'), async (req, res) => {
   try {
-    // let { category } = req.body;
+    let body = req.body.content;
+    body = JSON.parse(body);
 
-    // const { name, _id } = await Category.findById(category);
-    // console.log(name, _id);
+    let newProduct = {
+      title: body.title,
+      category: body.category,
+      images: req.file.path,
+      brand: body.brand,
+      price: body.price,
+      cpu: body.cpu,
+      camera: body.camera,
+      size: body.size,
+      weight: body.weight,
+      display: body.display,
+      battery: body.battery,
+      memory: body.memory,
+      description: body.description,
+    };
 
-    // req.body.category = name;
+    const product = new Product(newProduct);
 
-    const product = await Product.create(req.body);
+    await product.save();
     return res.send(product);
   } catch (error) {
     return res.status(500).send(error.message);

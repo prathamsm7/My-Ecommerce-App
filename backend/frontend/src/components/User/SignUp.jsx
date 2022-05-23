@@ -12,6 +12,7 @@ import clientApi from '../../api';
 import { signupUser } from '../../redux/actions/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -26,11 +27,7 @@ const SignUp = () => {
   } = useForm();
 
   function onSubmit(values) {
-    console.log(values);
-    setTimeout(async () => {
-      // let data = await clientApi.post('/api/user', values);
-      dispatch(signupUser(values));
-    }, 3000);
+    dispatch(signupUser(values));
   }
 
   useEffect(() => {
@@ -48,9 +45,10 @@ const SignUp = () => {
       bg='aliceblue'
       color='#262626'
     >
+      <ToastContainer />
       <Heading>Sign Up</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl isInvalid={errors.firstName}>
+        <FormControl isInvalid={errors.firstName} isRequired>
           <FormLabel htmlFor='firstName'>First name</FormLabel>
           <Input
             id='firstName'
@@ -65,7 +63,7 @@ const SignUp = () => {
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={errors.lastName}>
+        <FormControl isInvalid={errors.lastName} isRequired>
           <FormLabel htmlFor='lastName'>Last name</FormLabel>
           <Input
             id='lastName'
@@ -80,7 +78,7 @@ const SignUp = () => {
           </FormErrorMessage>
         </FormControl>
 
-        <FormControl isInvalid={errors.email}>
+        <FormControl isInvalid={errors.email} isRequired>
           <FormLabel htmlFor='email'>Email</FormLabel>
           <Input
             id='email'
@@ -94,7 +92,7 @@ const SignUp = () => {
             {errors.email && errors.email.message}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={errors.password}>
+        <FormControl isInvalid={errors.password} isRequired>
           <FormLabel htmlFor='password'>Password</FormLabel>
           <Input
             type='password'
@@ -105,10 +103,7 @@ const SignUp = () => {
               minLength: { value: 8, message: 'Minimum length should be 8' },
             })}
           />
-          <FormHelperText>
-            Password must be combination of atleast 1 small, 1 capital, 1
-            number, 1 special characted and in total 8 Characters{' '}
-          </FormHelperText>
+
           <FormErrorMessage>
             {errors.password && errors.password.message}
           </FormErrorMessage>

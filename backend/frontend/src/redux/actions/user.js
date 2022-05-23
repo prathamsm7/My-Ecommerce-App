@@ -1,4 +1,5 @@
 import clientApi from '../../api';
+import { toast } from 'react-toastify';
 
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -14,18 +15,23 @@ export const loginUser = (payload) => async (dispatch) => {
 
     let data = await clientApi.post(`/api/user/login`, payload);
 
-    console.log(data);
-
     if (data.data.user) {
       localStorage.setItem('loginUser', JSON.stringify(data.data.user));
       localStorage.setItem('token', JSON.stringify(data.data.token));
     }
 
-    dispatch({
-      type: LOGIN_USER_SUCCESS,
-      payload: { user: data.data.user },
-    });
+    setTimeout(() => {
+      dispatch({
+        type: LOGIN_USER_SUCCESS,
+        payload: { user: data.data.user },
+      });
+    }, 2000);
+    toast.success('Sign In Successfully');
   } catch (error) {
+    toast.error(
+      error.response.data.message ? error.response.data.message : error.message
+    );
+
     dispatch({
       type: LOGIN_USER_FAIL,
       payload: error.response.data.message
@@ -41,8 +47,22 @@ export const signupUser = (payload) => async (dispatch) => {
 
     const data = await clientApi.post(`/api/user`, payload);
 
-    dispatch({ type: REGISTER_USER_SUCCESS, payload: data.data.user });
+    setTimeout(() => {
+      dispatch({ type: REGISTER_USER_SUCCESS, payload: data.data.user });
+    }, 2000);
+
+    toast.info('Sign Up Successfully. Please Log In !');
   } catch (error) {
+    if (error.response.data.error) {
+      toast.error(error.response.data.error);
+    } else {
+      toast.error(
+        error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+
     dispatch({
       type: REGISTER_USER_FAIL,
       payload: error.response.data.message

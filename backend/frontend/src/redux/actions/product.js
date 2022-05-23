@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
 export const ALL_PRODUCTS_FAIL = 'ALL_PRODUCTS_FAIL';
 export const ALL_PRODUCTS_REQUEST = 'ALL_PRODUCTS_REQUEST';
 export const ALL_PRODUCTS_SUCCESS = 'ALL_PRODUCTS_SUCCESS';
@@ -62,17 +65,25 @@ export const createProduct = (formData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
-    const { data } = await clientApi.post('/api/product', formData);
+    console.log(formData);
+    const { data } = await clientApi('/api/product', formData);
 
-    dispatch({
-      type: NEW_PRODUCT_SUCCESS,
-      payload: data,
-    });
+    setTimeout(() => {
+      dispatch({
+        type: NEW_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    }, 3000);
+
+    toast.success('Product Created !');
   } catch (error) {
-    dispatch({
-      type: NEW_PRODUCT_FAIL,
-      payload: error.response.data.message,
-    });
+    setTimeout(() => {
+      toast.info('Product Creation Failed');
+      dispatch({
+        type: NEW_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
+    }, 2000);
   }
 };
 
@@ -82,11 +93,15 @@ export const updateProduct = (id, formData) => async (dispatch) => {
 
     const { data } = await clientApi.patch(`/api/product/${id}`, formData);
 
-    dispatch({
-      type: UPDATE_PRODUCT_SUCCESS,
-      payload: data,
-    });
+    setTimeout(() => {
+      dispatch({
+        type: UPDATE_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    }, 2000);
+    toast.info('Product Updated');
   } catch (error) {
+    toast.erroe('Product Updation Failed');
     dispatch({
       type: UPDATE_PRODUCT_FAIL,
       payload: error.response.data.message,
@@ -99,12 +114,16 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
     const { data } = await clientApi.delete(`/api/product/${id}`);
+    setTimeout(() => {
+      dispatch({
+        type: DELETE_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    }, 2000);
 
-    dispatch({
-      type: DELETE_PRODUCT_SUCCESS,
-      payload: data,
-    });
+    toast.info('Product Deleted Successfully');
   } catch (error) {
+    toast.error('Something Went Wrong');
     dispatch({
       type: DELETE_PRODUCT_FAIL,
       payload: error.response.data.message,

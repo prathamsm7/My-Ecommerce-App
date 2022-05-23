@@ -95,7 +95,7 @@ const Home = () => {
       setIsLoading(false);
 
       dispatch(getProducts(sortBy, filterArr));
-    }, 3000);
+    }, 2000);
   }, [sortBy]);
 
   return (
@@ -226,6 +226,7 @@ const Home = () => {
             <SimpleGrid columns={[1, 2, 3]} spacing='10px' m={'auto'}>
               {products &&
                 products.map((prod) => {
+                  console.log(`${prod.images}`);
                   return (
                     <Box
                       id='pCard'
@@ -245,9 +246,14 @@ const Home = () => {
                       <Image
                         h='150px'
                         objectFit='cover'
-                        src={`${prod.images[0]}`}
+                        src={
+                          typeof prod.images == 'object'
+                            ? `${prod.images[0]}`
+                            : prod.images
+                        }
                         alt='Dan Abramov'
                         m={'auto'}
+                        loading='lazy'
                       />
                       <Text fontSize='md' fontWeight='bold' color='tomato'>
                         {prod.title}

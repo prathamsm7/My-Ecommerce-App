@@ -12,6 +12,7 @@ import clientApi from '../../api';
 import { loginUser } from '../../redux/actions/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -25,9 +26,9 @@ const SignIn = () => {
   } = useForm();
 
   function onSubmit(values) {
-    setTimeout(async () => {
-      dispatch(loginUser(values));
-    }, 3000);
+    // setTimeout(async () => {
+    dispatch(loginUser(values));
+    // }, 3000);
   }
 
   useEffect(() => {
@@ -45,9 +46,10 @@ const SignIn = () => {
       bg='aliceblue'
       color='#262626'
     >
+      <ToastContainer />
       <Heading>Sign In</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl isInvalid={errors.email}>
+        <FormControl isInvalid={errors.email} isRequired>
           <FormLabel htmlFor='email'>Email</FormLabel>
           <Input
             id='email'
@@ -61,7 +63,7 @@ const SignIn = () => {
             {errors.email && errors.email.message}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={errors.password}>
+        <FormControl isInvalid={errors.password} isRequired>
           <FormLabel htmlFor='password'>Password</FormLabel>
           <Input
             type='password'
@@ -72,10 +74,6 @@ const SignIn = () => {
               minLength: { value: 8, message: 'Minimum length should be 8' },
             })}
           />
-          <FormHelperText>
-            Password must be combination of atleast 1 small, 1 capital, 1
-            number, 1 special characted and in total 8 Characters{' '}
-          </FormHelperText>
           <FormErrorMessage>
             {errors.password && errors.password.message}
           </FormErrorMessage>

@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import AllRoutes from './components/Routes';
 import { ChakraProvider } from '@chakra-ui/react';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (

@@ -106,11 +106,35 @@ const Navbar = () => {
                   My Cart <Badge colorScheme='red'>{cart.length}</Badge>{' '}
                 </Link>
               </MenuItem>
+
+              {email || user?.user?.email ? (
+                <>
+                  {role == 'admin' || user?.user?.role == 'admin' ? (
+                    <>
+                      <MenuItem>
+                        <Link to='/product/manage'>Product</Link>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <Link to='/category'>Category</Link>
+                      </MenuItem>
+                    </>
+                  ) : null}
+                  <MenuItem>Sign Out</MenuItem>
+                </>
+              ) : (
+                <>
+                  <Link to='/signin'>Signin</Link>
+                  {!isReg ? (
+                    <Link to='/signup' style={{ marginLeft: '10px' }}>
+                      Signup
+                    </Link>
+                  ) : null}
+                </>
+              )}
               <MenuItem>
                 <Link to='/'>About</Link>
               </MenuItem>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Setting</MenuItem>
             </MenuList>
           </Menu>
         </Box>

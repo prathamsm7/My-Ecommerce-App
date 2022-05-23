@@ -39,6 +39,7 @@ import {
   updateProduct,
 } from '../../redux/actions/product';
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 const ManageProducts = () => {
   const dispatch = useDispatch();
@@ -79,6 +80,7 @@ const ManageProducts = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(updateProduct(selected._id, values));
+
     setTimeout(() => {
       onClose();
       setValues({ title: '', price: '' });
@@ -95,6 +97,7 @@ const ManageProducts = () => {
       bg='aliceblue'
       color='#262626'
     >
+      <ToastContainer />
       <Flex justifyContent='flex-end' color='red'>
         <Link to='/product/new'>Create New Product</Link>
       </Flex>

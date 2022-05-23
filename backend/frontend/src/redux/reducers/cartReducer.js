@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   ADD_PRODUCT_TO_CART,
   DECREMENT_CART_ITEM_QUANTITY,
@@ -59,8 +60,9 @@ export default function (state = initialState, action) {
           ...action.payload.product,
           quantity: action.payload.quantity,
         });
+        toast.info('Item added into the cart');
       } else {
-        alert('Item already into your cart');
+        toast.error('Item already into your cart');
         const updatedItem = {
           ...updatedCart[updatedItemIndex],
         };
@@ -68,7 +70,6 @@ export default function (state = initialState, action) {
         updatedItem.quantity++;
         updatedCart[updatedItemIndex] = updatedItem;
       }
-      console.log(updatedCart);
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       return { ...state, cart: updatedCart };
 

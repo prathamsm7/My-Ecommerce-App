@@ -16,11 +16,12 @@ import { removeSelectedProducts } from '../redux/actions/product';
 import { showProduct } from '../redux/actions/product';
 import { addProductToCart } from '../redux/actions/cart';
 import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Details = () => {
   let { id } = useParams();
   let dispatch = useDispatch();
-  let { product } = useSelector((state) => state.product);
+  let { product, loading } = useSelector((state) => state.product);
   const [isLoading, setIsLoading] = useState(false);
 
   const [itemQuantity, setItemQuantity] = useState(1);
@@ -60,6 +61,7 @@ const Details = () => {
       bg='aliceblue'
       color='#262626'
     >
+      <ToastContainer />
       <SimpleGrid columns={[1, 2]} spacing='40px'>
         <Box
           style={{
@@ -67,21 +69,7 @@ const Details = () => {
               'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
           }}
         >
-          {product ? (
-            <Box p={2} as='article'>
-              <Image
-                h='350px'
-                objectFit='fill'
-                w='100%'
-                src={`${
-                  product.images
-                    ? product.images[0]
-                    : 'https://productimages.hepsiburada.net/s/18/280-413/9801258663986.jpg?v1'
-                }`}
-                alt='stock image'
-              />
-            </Box>
-          ) : (
+          {loading ? (
             <div>
               <Stack>
                 <Skeleton height='20px' />
@@ -89,10 +77,33 @@ const Details = () => {
                 <Skeleton height='20px' />
               </Stack>
             </div>
-          )}
+          ) : product ? (
+            <Box p={2} as='article'>
+              <Image
+                h='350px'
+                objectFit='fill'
+                w='100%'
+                src={
+                  typeof product.images == 'object'
+                    ? `${product.images[0]}`
+                    : `${product.images}`
+                }
+                // loading='lazy'
+                alt='stock image'
+              />
+            </Box>
+          ) : null}
         </Box>
         <Box textAlign='left'>
-          {product ? (
+          {loading ? (
+            <div>
+              <Stack>
+                <Skeleton height='20px' />
+                <Skeleton height='20px' />
+                <Skeleton height='20px' />
+              </Stack>
+            </div>
+          ) : product ? (
             <>
               <Heading as='h2' size='md' mb='20px'>
                 {product.title}
@@ -196,7 +207,6 @@ const Details = () => {
                   setIsLoading(true);
                   setTimeout(() => {
                     setIsLoading(false);
-
                     dispatch(addProductToCart(product, itemQuantity));
                   }, 2000);
                 }}
@@ -205,15 +215,7 @@ const Details = () => {
                 {isLoading ? `Adding...` : `Add to Cart`}
               </Button>
             </>
-          ) : (
-            <div>
-              <Stack>
-                <Skeleton height='20px' />
-                <Skeleton height='20px' />
-                <Skeleton height='20px' />
-              </Stack>
-            </div>
-          )}
+          ) : null}
         </Box>
       </SimpleGrid>
     </Container>

@@ -29,7 +29,6 @@ const NewProduct = () => {
   const [values, setValues] = useState({
     title: '',
     category: '',
-    images: '',
     brand: '',
     price: '',
     cpu: '',
@@ -41,11 +40,11 @@ const NewProduct = () => {
     memory: '',
     description: '',
   });
+  const [images, setImages] = useState('');
 
   const {
     title,
     category,
-    images,
     brand,
     price,
     cpu,
@@ -60,7 +59,11 @@ const NewProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createProduct(values));
+    const formData = new FormData();
+    formData.append('content', JSON.stringify(values));
+    formData.append('images', images);
+
+    dispatch(createProduct(formData));
     navigate('/product/manage');
   };
 
@@ -115,10 +118,10 @@ const NewProduct = () => {
           <FormLabel htmlFor='images'>Image</FormLabel>
           <Input
             id='images'
-            type='text'
-            value={images}
+            type='file'
             onChange={(e) => {
-              onChangeInput(e);
+              console.log(e.target.files);
+              setImages(e.target.files[0]);
             }}
           />
           <FormLabel htmlFor='brand'>Brand</FormLabel>
