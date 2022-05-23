@@ -66,7 +66,7 @@ export const createProduct = (formData) => async (dispatch) => {
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
     console.log(formData);
-    const { data } = await clientApi('/api/product', formData);
+    const { data } = await clientApi.post('/api/product', formData);
 
     setTimeout(() => {
       dispatch({
@@ -74,7 +74,6 @@ export const createProduct = (formData) => async (dispatch) => {
         payload: data,
       });
     }, 3000);
-
     toast.success('Product Created !');
   } catch (error) {
     setTimeout(() => {
