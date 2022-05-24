@@ -2,16 +2,17 @@ require('dotenv').config({ path: '../.env' });
 
 const express = require('express');
 const app = express();
-const connect = require('./config/db');
+const connect = require('./src/config/db');
 const cors = require('cors');
 const path = require('path');
 
-const usercontroller = require('./controllers/user.controller');
-const categoryController = require('./controllers/category.controller');
-const productController = require('./controllers/product');
-const paymentController = require('./controllers/payment');
+const usercontroller = require('./src/controllers/user.controller');
+const categoryController = require('./src/controllers/category.controller');
+const productController = require('./src/controllers/product');
+const paymentController = require('./src/controllers/payment');
 
-app.use(express.json({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors());
 
 app.use('/api/user', usercontroller);
