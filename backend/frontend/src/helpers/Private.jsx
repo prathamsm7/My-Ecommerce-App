@@ -1,20 +1,26 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-const Private = ({ isUser, redirectPath = '/', isAllow, children }) => {
-  let { user, email, role } = useSelector((state) => state.user);
+const Private = ({
+  isAuthenticated,
+  isLoggedIn,
+  children,
+  adminRoute,
+  isAdmin,
+  redirect = '/signin',
+  redirectAdmin = '/cart',
+  redirectUser = '/home',
+}) => {
+  let loaction = useLocation();
 
-  if (isUser.isAuth) {
-    user = user.user;
-  } else {
-    user = isUser;
+  console.log(loaction);
+
+  if (!isAuthenticated) {
+    return <Navigate to={redirect} />;
   }
 
-  if (!user.email) {
-    console.log('pr', user);
-    // return navigate(redirectPath, { replace });
-    return <Navigate to={redirectPath} replace />;
+  if (adminRoute && !isAdmin) {
+    return <Navigate to={redirectAdmin} />;
   }
 
   return children ? children : <Outlet />;

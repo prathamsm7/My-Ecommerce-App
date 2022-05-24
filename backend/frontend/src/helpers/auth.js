@@ -3,7 +3,8 @@ export const isAuthenticated = () => {
     return false;
   }
   if (localStorage.getItem('token')) {
-    return JSON.parse(localStorage.getItem('token'));
+    // return JSON.parse(localStorage.getItem('token'));
+    return true;
   } else {
     return false;
   }

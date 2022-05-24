@@ -51,7 +51,6 @@ const Home = () => {
   let navigate = useNavigate();
 
   const handleClick = (id) => {
-    console.log(id);
     navigate(`/details/${id}`);
   };
 
@@ -226,7 +225,6 @@ const Home = () => {
             <SimpleGrid columns={[1, 2, 3]} spacing='10px' m={'auto'}>
               {products &&
                 products.map((prod) => {
-                  console.log(`${prod.images}`);
                   return (
                     <Box
                       id='pCard'

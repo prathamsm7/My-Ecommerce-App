@@ -14,15 +14,6 @@ import axios from 'axios';
 import clientApi from '../api';
 
 const LandingPage = () => {
-  // useEffect(() => {
-  //   get();
-  // }, []);
-
-  // const get = async () => {
-  //   let data = await clientApi.get('/api/user/demo');
-  //   console.log(data);
-  // };
-
   return (
     <Container
       maxW={['100%', '95%']}
@@ -40,8 +31,9 @@ const LandingPage = () => {
         p='10px'
       >
         <Box height={['auto', '400px']}>
-          <Text fontSize='4xl'>
-            Welcome to <Text color='blue'>MobiShop</Text>
+          <Text fontSize='4xl'>Welcome to</Text>
+          <Text color='blue' fontSize='4xl'>
+            MobiShop
           </Text>
           <Text fontSize='xl'>Purchase your favourite products</Text>
           <Text color='gray.500' noOfLines={2}>

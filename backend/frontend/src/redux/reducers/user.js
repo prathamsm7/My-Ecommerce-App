@@ -9,12 +9,17 @@ import {
 } from '../actions/user';
 
 let obj = JSON.parse(localStorage.getItem('loginUser')) || {
-  user: {},
+  user: { loading: false, error: false, isAuth: false },
 };
 
 export const userReducer = (state = obj, action) => {
   switch (action.type) {
     case LOGIN_USER_REQUEST:
+      return {
+        loading: true,
+        error: false,
+        isAuth: false,
+      };
     case REGISTER_USER_REQUEST:
       return {
         loading: true,
