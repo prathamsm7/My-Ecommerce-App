@@ -6,6 +6,12 @@ import {
   REGISTER_USER_SUCCESS,
   REGISTER_USER_REQUEST,
   LOGOUT_USER,
+  FORGOT_PASSWORD_FAIL,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_REQUEST,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAIL,
 } from '../actions/user';
 
 let obj = JSON.parse(localStorage.getItem('loginUser')) || {
@@ -60,6 +66,38 @@ export const userReducer = (state = obj, action) => {
       };
     case LOGOUT_USER:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const forgotPasswordReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case FORGOT_PASSWORD_REQUEST:
+    case RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: payload,
+      };
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: payload,
+      };
+    case FORGOT_PASSWORD_FAIL:
+    case RESET_PASSWORD_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
     default:
       return state;
   }

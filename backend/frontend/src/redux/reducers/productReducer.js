@@ -1,10 +1,4 @@
 import {
-  SHOW_ALL_PRODUCTS,
-  SHOW_PRODUCT,
-  REMOVE_SELECTED_PRODUCT,
-} from '../actions';
-
-import {
   ALL_PRODUCTS_FAIL,
   ALL_PRODUCTS_REQUEST,
   ALL_PRODUCTS_SUCCESS,
@@ -20,24 +14,12 @@ import {
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL,
+  REMOVE_SELECTED_PRODUCT,
 } from '../actions/product';
 
 const initState = {
   products: [],
 };
-
-// export default function (state = initState, action) {
-//   switch (action.type) {
-//     case SHOW_ALL_PRODUCTS:
-//       return { ...state, products: action.payload };
-//     case SHOW_PRODUCT:
-//       return { ...state, product: action.payload };
-//     case REMOVE_SELECTED_PRODUCT:
-//       return {};
-//     default:
-//       return state;
-//   }
-// }
 
 export const productReducer = (state = initState, action) => {
   switch (action.type) {

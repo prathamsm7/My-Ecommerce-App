@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, FormHelperText, Heading } from '@chakra-ui/react';
+import { Box, Container, FormHelperText, Heading } from '@chakra-ui/react';
 import {
   FormErrorMessage,
   FormLabel,
@@ -87,6 +87,11 @@ const SignIn = () => {
           Submit
         </Button>
       </form>
+      <Box>
+        <Link to='/forgot-password' style={{ color: 'blue' }}>
+          Forgot Password
+        </Link>
+      </Box>
       <span>
         Don't Have an account ?{' '}
         <Link to='/signup' style={{ color: 'blue' }}>

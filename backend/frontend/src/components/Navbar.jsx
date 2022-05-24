@@ -98,17 +98,16 @@ const Navbar = () => {
               style={{ outline: '2px solid #ff2575' }}
             />
             <MenuList>
-              <MenuItem>
-                <Link to='/orders'>My Orders</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to='/cart'>
-                  My Cart <Badge colorScheme='red'>{cart.length}</Badge>{' '}
-                </Link>
-              </MenuItem>
-
               {email || user?.user?.email ? (
                 <>
+                  <MenuItem>
+                    <Link to='/orders'>My Orders</Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link to='/cart'>
+                      My Cart <Badge colorScheme='red'>{cart.length}</Badge>{' '}
+                    </Link>
+                  </MenuItem>
                   {role == 'admin' || user?.user?.role == 'admin' ? (
                     <>
                       <MenuItem>
@@ -120,15 +119,24 @@ const Navbar = () => {
                       </MenuItem>
                     </>
                   ) : null}
-                  <MenuItem>Sign Out</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      dispatch(logoutUser());
+                    }}
+                  >
+                    Sign Out
+                  </MenuItem>
                 </>
               ) : (
                 <>
-                  <Link to='/signin'>Signin</Link>
+                  <MenuItem>
+                    <Link to='/signin'>Signin</Link>
+                  </MenuItem>
+
                   {!isReg ? (
-                    <Link to='/signup' style={{ marginLeft: '10px' }}>
-                      Signup
-                    </Link>
+                    <MenuItem>
+                      <Link to='/signup'>Signup</Link>
+                    </MenuItem>
                   ) : null}
                 </>
               )}

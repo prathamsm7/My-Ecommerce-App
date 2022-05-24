@@ -8,7 +8,7 @@ import {
   productReducer,
   showProductReducer,
 } from './productReducer';
-import { userReducer } from './user';
+import { forgotPasswordReducer, userReducer } from './user';
 
 export default combineReducers({
   products: productReducer,
@@ -20,4 +20,5 @@ export default combineReducers({
   categories: categoryReducer,
   newCategory: newCategoryReducer,
   newProduct: productCRUDReducer,
+  forgotPassword: forgotPasswordReducer,
 });

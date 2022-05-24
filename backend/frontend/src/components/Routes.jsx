@@ -14,10 +14,13 @@ import SignIn from './User/SignIn';
 import SignUp from './User/SignUp';
 import NewProduct from './product/New';
 import ManageProducts from './product/ManageProducts';
+import PageNotFound from './PageNotFound';
 
 import { useSelector } from 'react-redux';
 import Private from '../helpers/Private';
 import { isAuthenticated } from '../helpers/auth';
+import ForgotPassword from './User/ForgotPassword';
+import ResetPassword from './User/ResetPassword';
 
 const AllRoutes = () => {
   let auth = isAuthenticated();
@@ -42,7 +45,16 @@ const AllRoutes = () => {
           path='/signup'
           element={auth ? <Navigate to='/' /> : <SignUp />}
         />
-        //Private Routes
+
+        <Route
+          path='/forgot-password'
+          element={auth ? <Navigate to='/' /> : <ForgotPassword />}
+        />
+        <Route
+          path='/resetpassword/:token'
+          element={auth ? <Navigate to='/' /> : <ResetPassword />}
+        />
+
         <Route element={<Private isAuthenticated={auth} />}>
           <Route path='/home' element={<Home />} />
           <Route path='/details/:id' element={<Details />} />
@@ -50,7 +62,7 @@ const AllRoutes = () => {
           <Route path='/checkout' element={<CheckoutPage />} />
           <Route path='/orders' element={<Orders />} />
         </Route>
-        //Admin Routes
+
         <Route
           element={
             <Private
@@ -65,7 +77,7 @@ const AllRoutes = () => {
           <Route path='/product/new' element={<NewProduct />} />
           <Route path='/product/manage' element={<ManageProducts />} />
         </Route>
-        <Route path='*' element={<div>Page Not Found 404</div>} />
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer />
     </>

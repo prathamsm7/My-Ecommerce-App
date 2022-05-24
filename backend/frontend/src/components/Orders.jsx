@@ -72,7 +72,7 @@ const Orders = () => {
             <Thead bgColor='lightgray'>
               <Tr>
                 <Th>Sr.No</Th>
-                <Th>Order Id</Th>
+                <Th display={['none', 'block']}>Order Id</Th>
                 <Th>Total Amount</Th>
                 <Th>Total Items</Th>
                 <Th>Order Date</Th>
@@ -86,7 +86,7 @@ const Orders = () => {
                   return (
                     <Tr key={data._id}>
                       <Td>{index + 1}</Td>
-                      <Td>{data.transactionId}</Td>
+                      <Td display={['none', 'block']}>{data.transactionId}</Td>
                       <Td>{data.total.toFixed(2)}</Td>
                       <Th>{data.totalItems}</Th>
                       <Th>{date.substring(0, 25)}</Th>

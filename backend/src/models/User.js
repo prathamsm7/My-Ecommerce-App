@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   contact: { type: Number },
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
   password: { type: String, required: true },
-  resetLink: { data: String, default: '' },
+  resetLink: { type: String, default: '' },
 });
 
 userSchema.pre('save', function (next) {
