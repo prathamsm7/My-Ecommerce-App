@@ -35,6 +35,12 @@ const paymentSchema = new mongoose.Schema(
     total: { type: Number, required: true },
     totalItems: { type: Number, required: true },
     transactionId: { type: String },
+    status: {
+      type: String,
+      enum: ['Processing', 'Dispatched', 'Delivered'],
+      default: 'Processing',
+    },
+    deliveryDate: Date,
   },
   {
     versionKey: false,

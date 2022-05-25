@@ -89,4 +89,29 @@ router.post('/pay', async (req, res) => {
   }
 });
 
+router.put('/:orderId', async (req, res) => {
+  try {
+    let order = await Payment.findById(req.params.orderId);
+
+    if (!order) {
+      return res.status(404).send('Order Not Found');
+    }
+
+    if (order.status === 'Delivered') {
+      return res.status(400).send('Order Already Delivered');
+    }
+
+    if (req.body.status == 'Delivered') {
+      order.deliveryDate = Date.now();
+    }
+
+    order.status = req.body.status;
+    await order.save({ runValidators: true });
+
+    return res.send(order);
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+});
+
 module.exports = router;
