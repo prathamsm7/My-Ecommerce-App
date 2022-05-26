@@ -2,7 +2,11 @@ import { combineReducers } from 'redux';
 import { fetchOrders } from '../actions/order';
 import shopReducer from './cartReducer';
 import { categoryReducer, newCategoryReducer } from './categoryReducer';
-import { orderReducer, ordersReducer } from './orderReducer';
+import {
+  orderReducer,
+  ordersReducer,
+  updateOrderReducer,
+} from './orderReducer';
 import {
   productCRUDReducer,
   productReducer,
@@ -16,6 +20,7 @@ export default combineReducers({
   cart: shopReducer,
   order: orderReducer,
   orders: ordersReducer,
+  updateOrder: updateOrderReducer,
   user: userReducer,
   categories: categoryReducer,
   newCategory: newCategoryReducer,

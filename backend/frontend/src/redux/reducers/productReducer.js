@@ -124,7 +124,6 @@ export const productCRUDReducer = (state = {}, action) => {
 };
 
 export const removeSelectedProductsReducer = (state, action) => {
-  console.log('removing');
   switch (action.type) {
     case REMOVE_SELECTED_PRODUCT:
       return {};

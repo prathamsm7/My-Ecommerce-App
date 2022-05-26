@@ -111,7 +111,6 @@ export const resetPassword = (formData) => async (dispatch) => {
 
     const { data } = await clientApi.put('/api/user/reset-password', formData);
 
-    // console.log(data);
     setTimeout(() => {
       dispatch({
         type: RESET_PASSWORD_SUCCESS,

@@ -69,8 +69,6 @@ router.get('/', async (req, res) => {
     let brandFilter = req.query.brands ? { brand: allBrands } : {};
     let allFilter = { ...brandFilter, ...priceFilter };
 
-    console.log(allBrands);
-
     const products = await Product.find(allFilter)
       .populate('category', '_id name')
       .sort([[sortBy, order]])

@@ -11,10 +11,6 @@ const Private = ({
   redirectAdmin = '/cart',
   redirectUser = '/home',
 }) => {
-  let loaction = useLocation();
-
-  console.log(loaction);
-
   if (!isAuthenticated) {
     return <Navigate to={redirect} />;
   }

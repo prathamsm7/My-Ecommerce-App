@@ -5,8 +5,6 @@ export const DECREMENT_CART_ITEM_QUANTITY = 'DECREMENT_CART_ITEM_QUANTITY';
 export const CLEAR_CART = 'CLEAR_CART';
 
 export const addProductToCart = (product, quantity) => {
-  // console.log(product, quantity);
-
   return {
     type: ADD_PRODUCT_TO_CART,
     payload: { product, quantity },

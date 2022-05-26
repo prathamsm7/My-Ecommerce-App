@@ -39,10 +39,8 @@ export const updateCategory = (id, formData) => async (dispatch) => {
     dispatch({ type: UPDATE_CATEGORY_REQUEST });
 
     let data = await clientApi.patch(`/api/category/${id}`, formData);
-    console.log('update data', data);
 
     let newData = await clientApi.get('/api/category');
-    console.log('new data', newData.data);
 
     dispatch({ type: UPDATE_CATEGORY_SUCCESS, payload: newData.data });
   } catch (error) {

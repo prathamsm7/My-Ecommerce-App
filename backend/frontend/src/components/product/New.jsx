@@ -122,7 +122,7 @@ const NewProduct = () => {
             id='images'
             type='file'
             onChange={(e) => {
-              console.log(e.target.files);
+              // console.log(e.target.files);
               setImages(e.target.files[0]);
             }}
           />
@@ -217,12 +217,7 @@ const NewProduct = () => {
             }}
           />
         </FormControl>
-        <Button
-          mt={4}
-          colorScheme='teal'
-          type='submit'
-          //   onClick={() => console.log(values)}
-        >
+        <Button mt={4} colorScheme='teal' type='submit'>
           Submit
         </Button>
       </form>

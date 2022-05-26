@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
 
     const finaleOrder = await Payment.create(order);
 
-    console.log('final order', finaleOrder);
+    // console.log('final order', finaleOrder);
 
     res.send(finaleOrder);
   } catch (error) {
@@ -45,6 +45,20 @@ router.get('/', async (req, res) => {
       .populate('orderedProducts.product');
 
     res.send(allPayment);
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+});
+
+router.get('/:orderId', async (req, res) => {
+  try {
+    let order = await Payment.findById(req.params.orderId)
+      .populate('user', '_id email firstName')
+      .populate('orderedProducts.product')
+      .lean()
+      .exec();
+
+    return res.send(order);
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -91,6 +105,7 @@ router.post('/pay', async (req, res) => {
 
 router.put('/:orderId', async (req, res) => {
   try {
+    // console.log(req.body);
     let order = await Payment.findById(req.params.orderId);
 
     if (!order) {

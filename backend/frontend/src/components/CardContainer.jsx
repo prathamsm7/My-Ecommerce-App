@@ -74,7 +74,6 @@ const CardContainer = () => {
         <>
           <VStack spacing={4} align='stretch'>
             {cart.map((item) => {
-              // console.log('cart item', item);
               return <Card key={item._id} {...item} img={item} />;
             })}
           </VStack>

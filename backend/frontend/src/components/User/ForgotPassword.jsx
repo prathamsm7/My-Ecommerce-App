@@ -24,7 +24,7 @@ const ForgotPassword = () => {
   } = useForm();
 
   async function onSubmit(values) {
-    console.log(values);
+    // console.log(values);
     setTimeout(async () => {
       dispatch(forgotPassword(values));
     }, 3000);

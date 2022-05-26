@@ -3,6 +3,11 @@ export const CREATE_ORDER = 'CREATE_ORDER';
 export const CLEAR_CART = 'CLEAR_CART';
 export const CLEAR_ORDER = 'CLEAR_ORDER';
 export const FETCH_ORDERS = 'FETCH_ORDERS';
+
+export const UPDATE_ORDER_FAIL = 'UPDATE_ORDER_FAIL';
+export const UPDATE_ORDER_REQUEST = 'UPDATE_ORDER_REQUEST';
+export const UPDATE_ORDER_SUCCESS = 'UPDATE_ORDER_SUCCESS';
+
 import clientApi from '../../api';
 
 export const createOrder = (payload) => async (dispatch) => {
@@ -31,4 +36,15 @@ export const fetchOrders = (id) => async (dispatch) => {
   let data = await orders.data;
 
   dispatch({ type: FETCH_ORDERS, payload: data });
+};
+
+export const updateOrder = (id, formData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_ORDER_REQUEST });
+
+    const { data } = await clientApi.put(`/api/payment/${id}`, formData);
+    dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({ type: UPDATE_ORDER_FAIL, payload: error.response.data.message });
+  }
 };

@@ -78,11 +78,10 @@ const Details = () => {
               </Stack>
             </div>
           ) : product ? (
-            <Box p={2} as='article'>
+            <Flex justifyContent='center' p={2} as='article'>
               <Image
                 h='350px'
                 objectFit='fill'
-                w='100%'
                 src={
                   typeof product.images == 'object'
                     ? `${product.images[0]}`
@@ -91,7 +90,7 @@ const Details = () => {
                 // loading='lazy'
                 alt='stock image'
               />
-            </Box>
+            </Flex>
           ) : null}
         </Box>
         <Box textAlign='left'>

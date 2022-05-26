@@ -50,7 +50,6 @@ export const showProduct = (id) => async (dispatch) => {
     dispatch({ type: SHOW_PRODUCT_REQUEST });
 
     let result = await clientApi(`/api/product/${id}`);
-    console.log('show prod', result);
 
     dispatch({ type: SHOW_PRODUCT_SUCCESS, payload: result.data });
   } catch (error) {
@@ -65,7 +64,6 @@ export const createProduct = (formData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
-    console.log(formData);
     const { data } = await clientApi.post('/api/product', formData);
 
     setTimeout(() => {

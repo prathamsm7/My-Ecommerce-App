@@ -28,7 +28,7 @@ const Cart = ({ title, images, price, cpu, camera, size, _id, quantity }) => {
 
   const incrementOrDecrement = (e, type) => {
     const value = itemQuantity;
-    console.log(type, value);
+    // console.log(type, value);
 
     if (type === 'inc' && value < 10) {
       setItemQuantity(itemQuantity + 1);

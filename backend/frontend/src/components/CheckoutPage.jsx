@@ -50,7 +50,6 @@ const CheckoutPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // console.log(name, value);
     setDetails({ ...details, [name]: value });
   };
 
@@ -63,7 +62,6 @@ const CheckoutPage = () => {
     cartItems += q;
   });
 
-  // console.log(user.user.user);
   // ! payment gateway
 
   let cartProducts = cart.map((prod) => {
@@ -141,7 +139,7 @@ const CheckoutPage = () => {
             })
             .catch((err) => {
               navigate('/cart');
-              console.log(err);
+              // console.log(err);
             });
         },
         prefill: {
