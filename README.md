@@ -6,7 +6,11 @@
 <li>Mern Stack</li>
 <li>Redux</li>
 <li>chakra-ui</li>
-<li>razorpay payment gateway</li>
+
+### Other Technologies
+<li>Razorpay payment gateway</li>
+<li>Multer for uploading images</li>
+<li>Nodemailer</li>
 
 ### Features
 <li>User Authentication</li>
