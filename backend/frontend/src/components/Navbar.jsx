@@ -39,14 +39,15 @@ const Navbar = () => {
           </Heading>
         </Box>
         <Spacer />
-        <Box display={['none', 'flex']} color='#00bbf9'>
+        <Box display={['none', 'flex']} color='#00ffe0'>
           <Box p='4'>
-            <Heading as='h6' size='sm' color='pink'>
+            <Heading as='h6' size='sm'>
               {email || user?.user?.email ? (
                 <Flex>
                   <Button
                     variant='outline'
-                    colorScheme='cyan'
+                    color='#ff7800'
+                    mt='-8px'
                     onClick={() => {
                       dispatch(logoutUser());
                     }}

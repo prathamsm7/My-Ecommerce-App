@@ -4,6 +4,7 @@ import {
   Container,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   SimpleGrid,
   Text,
@@ -162,6 +163,7 @@ const CheckoutPage = () => {
       bg='aliceblue'
       color='#262626'
     >
+      <Heading as='h3'>Checkout Details</Heading>
       <SimpleGrid columns={['1', '2']} spacing={10}>
         <form
           style={{
